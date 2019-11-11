@@ -65,7 +65,7 @@
             this.stop = new System.Windows.Forms.PictureBox();
             this.pause = new System.Windows.Forms.PictureBox();
             this.play = new System.Windows.Forms.PictureBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.downloadTC = new System.Windows.Forms.TabControl();
             this.Descargar = new System.Windows.Forms.TabPage();
             this.pathLabel = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -76,11 +76,19 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.button1 = new System.Windows.Forms.Button();
             this.urlTxt = new System.Windows.Forms.TextBox();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tetrisTC = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tetrisPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.sigPictureBox = new System.Windows.Forms.PictureBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.puntuacionLabel = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.tetrisTimer = new System.Windows.Forms.Timer(this.components);
+            this.tetrisImagenes = new System.Windows.Forms.ImageList(this.components);
+            this.downloadPB = new System.Windows.Forms.PictureBox();
+            this.tetrisPB = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.battery)).BeginInit();
@@ -99,18 +107,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.stop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pause)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.play)).BeginInit();
-            this.tabControl1.SuspendLayout();
+            this.downloadTC.SuspendLayout();
             this.Descargar.SuspendLayout();
-            this.tabControl2.SuspendLayout();
+            this.tetrisTC.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sigPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.downloadPB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tetrisPB)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel1.Controls.Add(this.tetrisPB);
+            this.panel1.Controls.Add(this.downloadPB);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.pictureBox1);
@@ -255,7 +268,6 @@
             this.selectButton.UseVisualStyleBackColor = true;
             this.selectButton.Visible = false;
             this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
-            this.selectButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.selectButton_KeyDown);
             // 
             // listView1
             // 
@@ -454,15 +466,16 @@
             this.play.TabStop = false;
             this.play.Click += new System.EventHandler(this.Play_Click);
             // 
-            // tabControl1
+            // downloadTC
             // 
-            this.tabControl1.Controls.Add(this.Descargar);
-            this.tabControl1.Location = new System.Drawing.Point(12, 406);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(360, 167);
-            this.tabControl1.TabIndex = 3;
-            this.tabControl1.TabStop = false;
+            this.downloadTC.Controls.Add(this.Descargar);
+            this.downloadTC.Location = new System.Drawing.Point(12, 406);
+            this.downloadTC.Name = "downloadTC";
+            this.downloadTC.SelectedIndex = 0;
+            this.downloadTC.Size = new System.Drawing.Size(360, 167);
+            this.downloadTC.TabIndex = 3;
+            this.downloadTC.TabStop = false;
+            this.downloadTC.Visible = false;
             // 
             // Descargar
             // 
@@ -502,7 +515,6 @@
             this.button2.Text = "Guardar en";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            this.button2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.button2_KeyDown);
             // 
             // label6
             // 
@@ -521,7 +533,6 @@
             this.fileName.Size = new System.Drawing.Size(233, 20);
             this.fileName.TabIndex = 5;
             this.fileName.TabStop = false;
-            this.fileName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fileName_KeyDown);
             // 
             // label5
             // 
@@ -560,7 +571,6 @@
             this.button1.Text = "Descargar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.button1_KeyDown);
             // 
             // urlTxt
             // 
@@ -569,17 +579,17 @@
             this.urlTxt.Size = new System.Drawing.Size(233, 20);
             this.urlTxt.TabIndex = 0;
             this.urlTxt.TabStop = false;
-            this.urlTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.urlTxt_KeyDown);
             // 
-            // tabControl2
+            // tetrisTC
             // 
-            this.tabControl2.Controls.Add(this.tabPage2);
-            this.tabControl2.Location = new System.Drawing.Point(646, 34);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(384, 532);
-            this.tabControl2.TabIndex = 4;
-            this.tabControl2.TabStop = false;
+            this.tetrisTC.Controls.Add(this.tabPage2);
+            this.tetrisTC.Location = new System.Drawing.Point(646, 34);
+            this.tetrisTC.Name = "tetrisTC";
+            this.tetrisTC.SelectedIndex = 0;
+            this.tetrisTC.Size = new System.Drawing.Size(384, 532);
+            this.tetrisTC.TabIndex = 4;
+            this.tetrisTC.TabStop = false;
+            this.tetrisTC.Visible = false;
             // 
             // tabPage2
             // 
@@ -590,7 +600,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(376, 506);
             this.tabPage2.TabIndex = 0;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Tetris!";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tetrisPanel
@@ -602,17 +612,65 @@
             this.tetrisPanel.Name = "tetrisPanel";
             this.tetrisPanel.Size = new System.Drawing.Size(250, 500);
             this.tetrisPanel.TabIndex = 1;
-            this.tetrisPanel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tetrisPanel_PreviewKeyDown);
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Black;
+            this.panel3.Controls.Add(this.sigPictureBox);
+            this.panel3.Controls.Add(this.label8);
+            this.panel3.Controls.Add(this.puntuacionLabel);
+            this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.pictureBox3);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel3.Location = new System.Drawing.Point(253, 3);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(120, 500);
             this.panel3.TabIndex = 0;
+            // 
+            // sigPictureBox
+            // 
+            this.sigPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.sigPictureBox.Location = new System.Drawing.Point(11, 105);
+            this.sigPictureBox.Name = "sigPictureBox";
+            this.sigPictureBox.Size = new System.Drawing.Size(100, 100);
+            this.sigPictureBox.TabIndex = 8;
+            this.sigPictureBox.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Impact", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(7, 79);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(90, 23);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Siguiente:";
+            // 
+            // puntuacionLabel
+            // 
+            this.puntuacionLabel.AutoSize = true;
+            this.puntuacionLabel.BackColor = System.Drawing.Color.Transparent;
+            this.puntuacionLabel.Font = new System.Drawing.Font("Impact", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.puntuacionLabel.ForeColor = System.Drawing.Color.White;
+            this.puntuacionLabel.Location = new System.Drawing.Point(7, 33);
+            this.puntuacionLabel.Name = "puntuacionLabel";
+            this.puntuacionLabel.Size = new System.Drawing.Size(110, 23);
+            this.puntuacionLabel.TabIndex = 6;
+            this.puntuacionLabel.Text = "0000000000";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Impact", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(7, 10);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(104, 23);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Puntuación:";
             // 
             // pictureBox3
             // 
@@ -625,6 +683,45 @@
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.playTetris_Click);
             // 
+            // tetrisTimer
+            // 
+            this.tetrisTimer.Interval = 1000;
+            this.tetrisTimer.Tick += new System.EventHandler(this.tetrisTimer_Tick);
+            // 
+            // tetrisImagenes
+            // 
+            this.tetrisImagenes.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("tetrisImagenes.ImageStream")));
+            this.tetrisImagenes.TransparentColor = System.Drawing.Color.Transparent;
+            this.tetrisImagenes.Images.SetKeyName(0, "I.png");
+            this.tetrisImagenes.Images.SetKeyName(1, "J.png");
+            this.tetrisImagenes.Images.SetKeyName(2, "L.png");
+            this.tetrisImagenes.Images.SetKeyName(3, "O.png");
+            this.tetrisImagenes.Images.SetKeyName(4, "Z1.png");
+            this.tetrisImagenes.Images.SetKeyName(5, "Z2.png");
+            this.tetrisImagenes.Images.SetKeyName(6, "T.png");
+            // 
+            // downloadPB
+            // 
+            this.downloadPB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("downloadPB.BackgroundImage")));
+            this.downloadPB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.downloadPB.Location = new System.Drawing.Point(120, 3);
+            this.downloadPB.Name = "downloadPB";
+            this.downloadPB.Size = new System.Drawing.Size(50, 37);
+            this.downloadPB.TabIndex = 6;
+            this.downloadPB.TabStop = false;
+            this.downloadPB.Click += new System.EventHandler(this.downloadPB_Click);
+            // 
+            // tetrisPB
+            // 
+            this.tetrisPB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tetrisPB.BackgroundImage")));
+            this.tetrisPB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.tetrisPB.Location = new System.Drawing.Point(176, 3);
+            this.tetrisPB.Name = "tetrisPB";
+            this.tetrisPB.Size = new System.Drawing.Size(50, 37);
+            this.tetrisPB.TabIndex = 7;
+            this.tetrisPB.TabStop = false;
+            this.tetrisPB.Click += new System.EventHandler(this.tetrisPB_Click);
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -632,14 +729,14 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1064, 681);
-            this.Controls.Add(this.tabControl2);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tetrisTC);
+            this.Controls.Add(this.downloadTC);
             this.Controls.Add(this.reproductor);
             this.Controls.Add(this.explorador);
             this.Controls.Add(this.panel1);
             this.Name = "GUI";
             this.Text = "GUI";
-            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.GUI_PreviewKeyDown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GUI_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -660,13 +757,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.stop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pause)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.play)).EndInit();
-            this.tabControl1.ResumeLayout(false);
+            this.downloadTC.ResumeLayout(false);
             this.Descargar.ResumeLayout(false);
             this.Descargar.PerformLayout();
-            this.tabControl2.ResumeLayout(false);
+            this.tetrisTC.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sigPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.downloadPB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tetrisPB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -707,7 +808,7 @@
         private System.Windows.Forms.PictureBox pause;
         private System.Windows.Forms.PictureBox play;
         private System.Windows.Forms.PictureBox closeReproductor;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl downloadTC;
         private System.Windows.Forms.TabPage Descargar;
         private System.Windows.Forms.TextBox urlTxt;
         private System.Windows.Forms.Button button1;
@@ -719,10 +820,18 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button selectButton;
         private System.Windows.Forms.Label pathLabel;
-        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabControl tetrisTC;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.FlowLayoutPanel tetrisPanel;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Timer tetrisTimer;
+        private System.Windows.Forms.PictureBox sigPictureBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label puntuacionLabel;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ImageList tetrisImagenes;
+        private System.Windows.Forms.PictureBox downloadPB;
+        private System.Windows.Forms.PictureBox tetrisPB;
     }
 }
